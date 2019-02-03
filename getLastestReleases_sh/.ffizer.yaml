@@ -1,0 +1,11 @@
+variables:
+  - name: get_latest_script_name
+    default_value: getLatest.sh
+    ask: Name of the getLatest script
+  - name: github_user
+  - name: github_repo
+    default_value: "{{ file_name ffizer_dst_folder }}"
+
+ignores:
+  - README.md
+  - LICENSE
