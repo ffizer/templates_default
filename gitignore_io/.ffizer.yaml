@@ -1,0 +1,8 @@
+variables:
+  - name: gitignore_what
+    default_value: git,visualstudiocode
+    ask: Create useful .gitignore (via gitignore.io) for
+
+ignores:
+  - README.md
+  - LICENSE
