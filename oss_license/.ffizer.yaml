@@ -1,0 +1,12 @@
+variables:
+  - name: licenses_json
+    default_value: '{{ http_get "https://spdx.org/licenses/licenses.json" }}'
+    hidden: true
+  - name: license_id
+    default_value: "Apache-2.0"
+    ask: select a license
+    select_in_values: '{{ json_str_query "licenses[? !isDeprecatedLicenseId].licenseId" licenses_json }}'
+
+ignores:
+  - README.md
+  - LICENSE
