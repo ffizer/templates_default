@@ -1,0 +1,5 @@
+variables:
+  - name: default_branch
+    default_value: master
+ignores:
+  - README.md

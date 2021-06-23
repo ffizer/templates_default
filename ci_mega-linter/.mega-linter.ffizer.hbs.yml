@@ -1,0 +1,18 @@
+# Configuration file for Mega-Linter
+# See all available variables at https://nvuillam.github.io/mega-linter/configuration/ and in linters documentation
+
+APPLY_FIXES: none # all, none, or list of linter keys
+DEFAULT_BRANCH: "{{ default_branch }}" # Usually master or main
+# ENABLE: # If you use ENABLE variable, all other languages/formats/tooling-formats will be disabled by default
+# ENABLE_LINTERS: # If you use ENABLE_LINTERS variable, all other linters will be disabled by default
+DISABLE:
+  - COPYPASTE # Comment to disable checks of abusive copy-pastes
+  - SPELL # Comment to disable checks of spelling mistakes # - SPELL # Uncomment to disable checks of spelling mistakes
+DISABLE_LINTERS:
+  - MARKDOWN_MARKDOWN_LINK_CHECK
+SHOW_ELAPSED_TIME: true
+FILEIO_REPORTER: false
+FORMATTERS_DISABLE_ERRORS: false
+PRINT_ALPACA: false
+# MARKDOWN_MARKDOWNLINT_CONFIG_FILE: '.github/linters/.markdown-lint.yml'
+MARKDOWN_MARKDOWNLINT_CONFIG_FILE: ".markdown-lint.yml"
