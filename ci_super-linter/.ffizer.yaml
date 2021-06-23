@@ -1,0 +1,10 @@
+variables:
+  - name: default_branch
+    default_value: master
+  - name: superlinter_version
+    default_value: slim-v4
+    select_in_values:
+      - slim-v4
+      - v4
+ignores:
+  - README.md
