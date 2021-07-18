@@ -1,0 +1,19 @@
+name: ci
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - name: setup env
+        shell: bash
+        run: |
+          curl -Lks 'https://github.com/ffizer/ffizer/releases/download/2.4.1/ffizer_2.4.1-x86_64-unknown-linux-gnu.tar.gz'  --output ffizer.tar.gz
+          tar -xvf ffizer.tar.gz
+          ./ffizer --version
+      - name: test oss_license
+        shell: bash
+        run: |
+          ./ffizer test-samples --source oss_license
