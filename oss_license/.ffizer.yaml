@@ -1,11 +1,13 @@
 variables:
-  - name: licenses_json
-    default_value: '{{ http_get "https://spdx.org/licenses/licenses.json" }}'
-    hidden: true
-  - name: license_id
+  - name: license
     default_value: "Apache-2.0"
     ask: select a license
-    select_in_values: '{{ json_str_query "licenses[? !isDeprecatedLicenseId].licenseId" licenses_json }}'
+    select_in_values: |
+      {{#jsonnet}}
+      local licenses_json = {{ http_get "https://spdx.org/licenses/licenses.json" }};
+      local lv = [{label: x.licenseId, value: x} for x in licenses_json.licenses];
+      std.sort(lv, keyF=function(x) x.label)
+      {{/jsonnet}}
 
 ignores:
   - README.md

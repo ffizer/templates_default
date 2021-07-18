@@ -1,6 +1,1 @@
-{{ assign "query" (replace "licenses[$idx$].detailsUrl" "$idx$" license_id__idx) }}
-{{ assign "url" ( json_query query (str_to_json licenses_json) ) }}
-{{! license_id__idx }}
-{{! query }}
-{{! url }}
-{{ json_query "licenseText" (str_to_json( http_get url )) }}
+{{json_query "licenseText" (str_to_json( http_get license.detailsUrl )) }}

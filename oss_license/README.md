@@ -1,6 +1,6 @@
 # Template OSS License
 
-A template to provide `LICENSE.txt` file and `license_id` (to inject into project metadata).
+A template to provide `LICENSE.txt` file and `license` (to inject into project metadata).
 
 The template use the license database from [Software Package Data Exchange (SPDX)](https://spdx.org/).
 
