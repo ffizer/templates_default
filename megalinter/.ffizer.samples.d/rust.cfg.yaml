@@ -1,0 +1,9 @@
+apply_args:
+  - -v
+  - flavor=rust
+  - -v
+  - copy_paste=false
+  - -v
+  - spelling_mistakes=false
+  - -v
+  - apply_fixes=false

@@ -1,0 +1,20 @@
+# Configuration file for MegaLinter
+# See all available variables at https://megalinter.github.io/configuration/ and in linters documentation
+
+APPLY_FIXES: {{#if apply_fixes}}all{{else}}none{{/if}} # all, none, or list of linter keys
+# ENABLE: # If you use ENABLE variable, all other languages/formats/tooling-formats will be disabled by default
+# ENABLE_LINTERS: # If you use ENABLE_LINTERS variable, all other linters will be disabled by default
+{{#if (and copy_paste spelling_mistakes)}}# {{/if}}DISABLE:
+  {{#if copy_paste}}
+  # - COPYPASTE # Uncomment to disable checks of excessive copy-pastes
+  {{else}}
+  - COPYPASTE # Comment to enable checks of excessive copy-pastes
+  {{/if}}
+  {{#if spelling_mistakes}}
+  # - SPELL # Uncomment to disable checks of spelling mistakes
+  {{else}}
+  - SPELL # Comment to enable checks of spelling mistakes
+  {{/if}}
+SHOW_ELAPSED_TIME: {{ elapsed_time }}
+FILEIO_REPORTER: {{ fileio_reporter }}
+# DISABLE_ERRORS: true # Uncomment if you want MegaLinter to detect errors but not block CI to pass

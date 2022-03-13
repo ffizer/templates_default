@@ -1,0 +1,120 @@
+variables:
+  - name: flavor
+    ask: What is your project type ?
+    default_value: "all"
+    select_in_values:
+      - value: "all"
+        label: "Let MegaLinter suggest to me later (recommended)"
+      - value: "dart"
+        label: "Dart"
+      - value: "documentation"
+        label: "Documentation"
+      - value: "dotnet"
+        label: "C, C++, C# or Visual Basic.net"
+      - value: "go"
+        label: "Go"
+      - value: "java"
+        label: "Java / Groovy / Kotlin"
+      - value: "javascript"
+        label: "Javascript / Typescript"
+      - value: "php"
+        label: "PHP"
+      - value: "python"
+        label: "Python"
+      - value: "ruby"
+        label: "Ruby"
+      - value: "rust"
+        label: "RUST"
+      - value: "salesforce"
+        label: "Salesforce"
+      - value: "scala"
+        label: "Scala"
+      - value: "swift"
+        label: "Swift"
+      - value: "terraform"
+        label: "Terraform"
+  - name: github_action_name
+    hidden: true
+    default_value: >-
+      megalinter/megalinter{{#if (ne flavor "all")}}/flavors/{{flavor}}{{/if}}
+  - name: docker_image_name
+    hidden: true
+    default_value: >-
+      megalinter/megalinter{{#if (ne flavor "all")}}-{{flavor}}{{/if}}
+  - name: ci
+    ask: "What CI/CD system do you use ?"
+    default_value: "GitHub Actions"
+    select_in_values:
+      - label: "GitHub Actions"
+        value: "gitHubActions"
+      # - label: "Jenkins"
+      #   value: "jenkins"
+      - label: "GitLab CI"
+        value: "gitLabCI"
+      # - label: "Azure Pipelines"
+      #   value: "azure"
+      - label: "Other, I will install workflow manually"
+        value: "other"
+  - name: copy_paste
+    ask: "Do you want to detect excessive copy-pastes ?"
+    default_value: true
+  - name: spelling_mistakes
+    ask: "Do you want to detect spelling mistakes ?"
+    default_value: true
+  - name: version
+    ask: "Which MegaLinter version do you want to use ?"
+    default_value: "v5"
+    select_in_values:
+      - label: "v5 (Latest official release)"
+        value: "v5"
+      - label: "Beta (main branch of MegaLinter repository)"
+        value: "beta"
+  # - name: default_branch
+  #   ask: "What is the name of your repository default branch ?"
+  #   default_value: "main"
+  #   select_in_values:
+  #     - main
+  #     - master
+  - name: validate_all_code_base
+    ask: "Do you want MegaLinter to validate all source code or only updated one ?"
+    default_value: "Validate all sources"
+    select_in_values:
+      - label: "Validate all sources"
+        value:
+          gha: >-
+            true # Set $\{{ github.event_name == 'push' && github.ref == 'refs/heads/main' }} to validate only diff with main branch
+      - label: "Validate only sources diff with master/main branch"
+        value:
+          gha: >-
+            $\{{ github.event_name == 'push' && github.ref == 'refs/heads/main' }} # Validates all source when push on main, else just the git diff with main. Set 'true' if you always want to lint all sources
+  - name: apply_fixes
+    ask: "Do you want to automatically apply formatting and auto-fixes (--fix option of linters) ?"
+    default_value: true
+  - name: fileio_reporter
+    ask: "Do you want MegaLinter to upload reports on file.io ? (report is deleted after being downloaded once)"
+    default_value: false
+  - name: elapsed_time
+    ask: "Do you want to see elapsed time by linter in logs ?"
+    default_value: true
+
+ignores:
+  - .git
+  - README.md
+  - >-
+    {{#if (ne ci "gitLabCI") }}.gitlab-ci.ffizer.hbs.yml{{/if}}
+  - >-
+    {{#if (ne ci "gitHubActions") }}.github{{/if}}
+  - >-
+    {{#if (not copy_paste) }}.jscpd.json{{/if}}
+  - >-
+    {{#if (not spelling_mistakes) }}.cspell.json{{/if}}
+
+scripts:
+  - message: |
+      {{#if (eq ci "other") }}
+      Other CI config generation not implemented yet, please follow manual instructions at https://megalinter.github.io/installation/
+      You may call `npx mega-linter-runner` to run MegaLinter from any system (requires node.js & docker)
+      {{/if}}
+
+      You're all set !
+      Now commit, push and create a pull request to see MegaLinter catching errors !
