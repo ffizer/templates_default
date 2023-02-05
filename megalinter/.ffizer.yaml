@@ -36,11 +36,11 @@ variables:
   - name: github_action_name
     hidden: true
     default_value: >-
-      megalinter/megalinter{{#if (ne flavor "all")}}/flavors/{{flavor}}{{/if}}
+      oxsecurity/megalinter{{#if (ne flavor "all")}}/flavors/{{flavor}}{{/if}}
   - name: docker_image_name
     hidden: true
     default_value: >-
-      megalinter/megalinter{{#if (ne flavor "all")}}-{{flavor}}{{/if}}
+      oxsecurity/megalinter{{#if (ne flavor "all")}}-{{flavor}}{{/if}}
   - name: ci
     ask: "What CI/CD system do you use ?"
     default_value: "GitHub Actions"
@@ -63,10 +63,10 @@ variables:
     default_value: true
   - name: version
     ask: "Which MegaLinter version do you want to use ?"
-    default_value: "v5"
+    default_value: "v6"
     select_in_values:
-      - label: "v5 (Latest official release)"
-        value: "v5"
+      - label: "v6 (Latest official release)"
+        value: "v6"
       - label: "Beta (main branch of MegaLinter repository)"
         value: "beta"
   # - name: default_branch
