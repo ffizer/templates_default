@@ -10,10 +10,11 @@ jobs:
       - name: setup env
         shell: bash
         run: |
-          curl -Lks 'https://github.com/ffizer/ffizer/releases/download/2.4.1/ffizer_2.4.1-x86_64-unknown-linux-gnu.tar.gz'  --output ffizer.tar.gz
+          curl -Lks 'https://github.com/ffizer/ffizer/releases/download/2.8.0/ffizer_2.8.0-x86_64-unknown-linux-gnu.tar.gz' --output ffizer.tar.gz
           tar -xvf ffizer.tar.gz
           ./ffizer --version
-      - name: test oss_license
+      - name: test samples
         shell: bash
         run: |
-          ./ffizer test-samples --source oss_license
+          # ./ffizer test-samples --source oss_license
+          ./test-samples-all.sh
